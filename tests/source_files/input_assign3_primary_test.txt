@@ -1,0 +1,9 @@
+5000
+turn off 3990,2730 through 4692,4333
+turn off 4721,4881 through 4817,4966
+switch 1685,2653 through 4969,3361
+turn on 1360,657 through 2601,2954
+turn off 3964,4114 through 4653,4323
+turn on 2585,3627 through 4228,4285
+turn off 1161,527 through 2401,2574
+turn on 4511,2123 through 4512,2125

@@ -4,15 +4,12 @@
 
 import os
 
-#fileName = ""
+def check_file_exists(file_name):
+    return os.path.isfile(file_name)
 
-def check_fileExists(fileName):
-    return os.path.isfile(fileName)
-
-#===============================================================================
-# def calculate(a, b):
-#     return a*b
-#===============================================================================
-
-
+def open_file_and_read(file_name):
+    with open(file_name) as f:
+        lines = f.read().splitlines()
+    return lines
+    
 
