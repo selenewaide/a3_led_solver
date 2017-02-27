@@ -35,6 +35,6 @@ def test_parse_commands_notvalid():
     print(myString)
     
 def test_change_lights():
-    pprint.pprint(change_lights("", "", ""))
+    pprint.pprint(change_lights("turn on", "0,0", "2,2"))
     #pprint(a2d[3][5])
     

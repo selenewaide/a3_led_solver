@@ -49,11 +49,18 @@ def parse_commands(each_line):
 def change_lights(command, coordinates1, coordinates2):
     led_grid = [[False]*10 for _ in range(10)]
     
-    for i in range(len(led_grid)):
-        for j in range(len(led_grid)):
-            if (i < 5 and j < 5):
-                led_grid[i][j] = True
-                the_test_c = (i, j, led_grid[i][j])
+    coordinates1_split = coordinates1.split(",")
+    x1 = int(coordinates1_split[0])
+    y1 = int(coordinates1_split[1])
+    
+    coordinates2_split = coordinates2.split(",")
+    x2 = int(coordinates2_split[0])
+    y2 = int(coordinates2_split[1])
+    
+    for i in range(x1,x2+1):
+        for j in range(y1,y2+1):
+            led_grid[i][j] = True
+            the_test_c = (i, j, led_grid[i][j])
                 
     #grid_sum = np.size(led_grid) - np.count_nonzero(led_grid)
     grid_sum = np.count_nonzero(led_grid)          
