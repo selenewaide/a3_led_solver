@@ -6,7 +6,7 @@
 import pprint
 import sys
 from nose.tools import *
-from led_solver.main_led import check_file_exists, open_file_and_read, create_grid, parse_commands, shlug
+from led_solver.main_led import check_file_exists, open_file_and_read, create_grid, parse_commands, change_lights
 
 def test_fileExists_validfile():
     ok_(check_file_exists("source_files/input_assign3_a.txt"), "This is an invalid path or file name.")
@@ -27,12 +27,14 @@ def test_create_grid():
     #pprint.pprint(test_grid) -> prints the grid
 
 def test_parse_commands():
-    myString = parse_commands("turn off this is my str")
+    myString = parse_commands("switch 1685,2653 through 4969,3361")
     print(myString)
     
-def test_shlug():
-    ok_(shlug('RoShlug'))
-    ok_(shlug('SeleneShlug'))
+def test_parse_commands_notvalid():
+    myString = parse_commands("xx turn off this is my str")
+    print(myString)
     
-def test_shlug_none():
-    ok_(not shlug(None))
+def test_change_lights():
+    pprint.pprint(change_lights("", "", ""))
+    #pprint(a2d[3][5])
+    

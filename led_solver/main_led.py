@@ -3,6 +3,7 @@
 '''
 
 import os
+import numpy as np
 
 def check_file_exists(file_name):
     return os.path.isfile(file_name)
@@ -36,10 +37,25 @@ def parse_commands(each_line):
         command = "turn off"
         params = each_line.replace(command,"")
         params = params.strip()
-        
-    return command, params
+    else:
+        return
     
-def shlug(name):
-    if name is None:
-        return False
-    return name.endswith('Shlug')
+    params_list = params.split(" ")  
+    coordinates_1 = params_list[0]
+    coordinates_2 = params_list[2]
+        
+    return command, coordinates_1, coordinates_2
+
+def change_lights(command, coordinates1, coordinates2):
+    led_grid = [[False]*10 for _ in range(10)]
+    
+    for i in range(len(led_grid)):
+        for j in range(len(led_grid)):
+            if (i < 5 and j < 5):
+                led_grid[i][j] = True
+                the_test_c = (i, j, led_grid[i][j])
+                
+    #grid_sum = np.size(led_grid) - np.count_nonzero(led_grid)
+    grid_sum = np.count_nonzero(led_grid)          
+    
+    return led_grid, the_test_c, grid_sum
