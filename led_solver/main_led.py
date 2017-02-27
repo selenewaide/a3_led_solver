@@ -46,9 +46,7 @@ def parse_commands(each_line):
         
     return command, coordinates_1, coordinates_2
 
-def change_lights(command, coordinates1, coordinates2):
-    led_grid = [[False]*10 for _ in range(10)]
-    
+def change_lights(led_grid, command, coordinates1, coordinates2):
     coordinates1_split = coordinates1.split(",")
     x1 = int(coordinates1_split[0])
     y1 = int(coordinates1_split[1])
@@ -57,12 +55,35 @@ def change_lights(command, coordinates1, coordinates2):
     x2 = int(coordinates2_split[0])
     y2 = int(coordinates2_split[1])
     
-    for i in range(x1,x2+1):
-        for j in range(y1,y2+1):
-            led_grid[i][j] = True
-            the_test_c = (i, j, led_grid[i][j])
+    # to deal with coordinates that are outside the grid
+    x1 = max(0,x1)
+    x2 = max(0,x2)
+    y1 = max(0,y1)
+    y2 = max(0,y2)
+    x1 = min(len(led_grid),x1)
+    x2 = min(len(led_grid),x2)
+    y1 = min(len(led_grid),y1)
+    y2 = min(len(led_grid),y2)
+    
+    
+    if (command == "turn on"):
+        for i in range(x1,x2+1):
+            for j in range(y1,y2+1):
+                led_grid[i][j] = True
+    elif (command == "turn off"):
+        for i in range(x1,x2+1):
+            for j in range(y1,y2+1):
+                led_grid[i][j] = False
+    elif (command == "switch"):
+        for i in range(x1,x2+1):
+            for j in range(y1,y2+1):
+                if (led_grid[i][j] == False):
+                    led_grid[i][j] = True
+                elif (led_grid[i][j] == True):
+                    led_grid[i][j] = False
+        
                 
     #grid_sum = np.size(led_grid) - np.count_nonzero(led_grid)
     grid_sum = np.count_nonzero(led_grid)          
     
-    return led_grid, the_test_c, grid_sum
+    return led_grid, grid_sum
