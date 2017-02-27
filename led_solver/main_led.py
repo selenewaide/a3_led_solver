@@ -60,11 +60,10 @@ def change_lights(led_grid, command, coordinates1, coordinates2):
     x2 = max(0,x2)
     y1 = max(0,y1)
     y2 = max(0,y2)
-    x1 = min(len(led_grid),x1)
-    x2 = min(len(led_grid),x2)
-    y1 = min(len(led_grid),y1)
-    y2 = min(len(led_grid),y2)
-    
+    x1 = min(len(led_grid)-1,x1)
+    x2 = min(len(led_grid)-1,x2)
+    y1 = min(len(led_grid)-1,y1)
+    y2 = min(len(led_grid)-1,y2)
     
     if (command == "turn on"):
         for i in range(x1,x2+1):
@@ -87,3 +86,15 @@ def change_lights(led_grid, command, coordinates1, coordinates2):
     grid_sum = np.count_nonzero(led_grid)          
     
     return led_grid, grid_sum
+
+def main_led(file_path):
+    light_count = 0
+    
+    source_data = open_file_and_read(file_path)
+    grid = create_grid(int(source_data[0]))
+    
+    for line in source_data[1:]:
+        command, coordinates1, coordinates2 = parse_commands(line)
+        grid, light_count = change_lights(grid, command, coordinates1, coordinates2)
+        
+    return grid, light_count

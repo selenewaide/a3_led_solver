@@ -6,7 +6,7 @@
 import pprint
 import sys
 from nose.tools import *
-from led_solver.main_led import check_file_exists, open_file_and_read, create_grid, parse_commands, change_lights
+from led_solver.main_led import check_file_exists, open_file_and_read, create_grid, parse_commands, change_lights, main_led
 
 def test_fileExists_validfile():
     ok_(check_file_exists("source_files/input_assign3_a.txt"), "This is an invalid path or file name.")
@@ -39,16 +39,9 @@ def test_change_lights():
     pprint.pprint(change_lights(test_grid, "switch", "0,0", "2,2"))
     #pprint(a2d[3][5])
     
-def test_everything():
-    light_count = 0
-    
-    source_data = open_file_and_read("source_files/input_assign3_primary_test.txt")
-    grid = create_grid(int(source_data[0]))
-    
-    for line in source_data[1:]:
-        command, coordinates1, coordinates2 = parse_commands(line)
-        grid, light_count = change_lights(grid, command, coordinates1, coordinates2)
+def test_main_led():
+    grid, light_count = main_led("source_files/input_assign3_primary_test.txt")
         
     pprint.pprint(grid)
-    eq_(10,light_count,"Error, this is not the correct number of lights.")
+    eq_(34,light_count,"Error, this is not the correct number of lights.")
     
