@@ -42,7 +42,7 @@ def parse_commands(each_line):
         params = each_line.replace(command,"")
         params = params.strip()
     else:
-        return
+        return None, None, None
     
     params_list = params.split(" ")  
     coordinates_1 = params_list[0]
@@ -106,6 +106,9 @@ def main_led(file_path):
     
     for line in source_data[1:]:
         command, coordinates1, coordinates2 = parse_commands(line)
+        if command is None:
+            print("Can't parse line")
+            continue
         grid, light_count = change_lights(grid, command, coordinates1, coordinates2)
         
     return grid, light_count
