@@ -8,9 +8,7 @@ setup(name="SoftwareEng_A3",
       author_email="selene.waide@ucdconnect.ie",
       licence="",
       packages=['led_solver'],
-      entry_points = {
-          'console_scripts': ['comp30670_SoftwareEng_A3 = led_solver.main:main_led']
-          },
+      scripts = ["scripts/solve_led"],
       install_requires=[
           'numpy'
       ],
