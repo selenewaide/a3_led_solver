@@ -1,0 +1,5 @@
+#!/usr/bin/python
+
+import sys
+from led_solver import main_led
+print(main_led.main_led(sys.argv[1]))
