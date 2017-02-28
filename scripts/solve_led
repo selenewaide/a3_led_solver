@@ -2,4 +2,5 @@
 
 import sys
 from led_solver import main_led
-print(main_led.main_led(sys.argv[1]))
+grid, light_count = main_led.main_led(sys.argv[1])
+print(light_count)
