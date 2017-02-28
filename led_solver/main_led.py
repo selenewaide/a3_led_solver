@@ -4,9 +4,13 @@
 
 import os
 import numpy as np
+import sys
 
 def check_file_exists(file_name):
-    return os.path.isfile(file_name)
+    if not os.path.isfile(file_name):
+        return
+    else:
+        return file_name
 
 # open files and read it into 'lines'
 def open_file_and_read(file_name):
@@ -87,10 +91,17 @@ def change_lights(led_grid, command, coordinates1, coordinates2):
     
     return led_grid, grid_sum
 
+
 def main_led(file_path):
     light_count = 0
     
-    source_data = open_file_and_read(file_path)
+    check_for_file = check_file_exists(file_path)
+    
+    if check_for_file is None:
+        print("File does not exits")
+        sys.exit()
+    
+    source_data = open_file_and_read(check_for_file)
     grid = create_grid(int(source_data[0]))
     
     for line in source_data[1:]:
