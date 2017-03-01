@@ -5,10 +5,14 @@
 import os
 import numpy as np
 import sys
+from numpy.core.defchararray import startswith
 
 # check file exits
 def check_file_exists(file_name):
     if not os.path.isfile(file_name):
+        if file_name.startswith("http"):
+            print("http is not supported. Use curl to download the file.")
+        
         return
     else:
         return file_name
@@ -130,7 +134,7 @@ def main_led(file_path):
     check_for_file = check_file_exists(file_path)
     
     if check_for_file is None:
-        print("File does not exits")
+        print("File does not exist.")
         sys.exit()
     
     source_data = open_file_and_read(check_for_file)
