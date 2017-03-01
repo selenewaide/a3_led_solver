@@ -129,7 +129,7 @@ def main_led(file_path):
     for line in source_data[1:]:
         command, coordinates1, coordinates2 = parse_commands(line)
         if command is None or coordinates1 is None or coordinates2 is None:
-            print("Can't parse line: " + line)
+            #print("Can't parse line: " + line)
             continue
         try:
             grid, light_count = change_lights(grid, command, coordinates1, coordinates2)
