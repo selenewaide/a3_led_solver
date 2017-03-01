@@ -47,8 +47,19 @@ def parse_commands(each_line):
     params_list = params.split(" ")  
     coordinates_1 = params_list[0]
     coordinates_2 = params_list[2]
-        
-    return command, coordinates_1, coordinates_2
+    
+    coordinates1_split = coordinates_1.split(",")
+    x1_check = isinstance(int(coordinates1_split[0]),int)
+    y1_check = isinstance(int(coordinates1_split[1]),int)
+    
+    coordinates2_split = coordinates_2.split(",")
+    x2_check = isinstance(int(coordinates2_split[0]),int)
+    y2_check = isinstance(int(coordinates2_split[1]),int)
+    
+    if x1_check and y1_check and x2_check and y2_check:
+        return command, coordinates_1, coordinates_2
+    else:
+        return None, None, None
 
 def change_lights(led_grid, command, coordinates1, coordinates2):
     coordinates1_split = coordinates1.split(",")
@@ -106,9 +117,12 @@ def main_led(file_path):
     
     for line in source_data[1:]:
         command, coordinates1, coordinates2 = parse_commands(line)
-        if command is None:
-            print("Can't parse line")
+        if command is None or coordinates1 is None or coordinates2 is None:
+            print("Can't parse line: " + line)
             continue
-        grid, light_count = change_lights(grid, command, coordinates1, coordinates2)
+        try:
+            grid, light_count = change_lights(grid, command, coordinates1, coordinates2)
+        except Exception:
+            raise Exception("Error on line: " + line)
         
     return grid, light_count
