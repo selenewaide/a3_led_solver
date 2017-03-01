@@ -1,3 +1,0 @@
-[console_scripts]
-comp30670_SoftwareEng_A3 = led_solver.main:main_led
-
