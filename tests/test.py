@@ -37,7 +37,7 @@ def test_parse_commands():
     
 def test_parse_commands_notvalid():
     myString = parse_commands("xx turn off this is my str")
-    eq_(None, myString, "Error, this is not the correct output")
+    eq_((None, None, None), myString, "Error, this is not the correct outputXX")
     #print(myString)
     
 def test_change_lights():

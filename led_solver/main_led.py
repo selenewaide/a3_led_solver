@@ -6,6 +6,7 @@ import os
 import numpy as np
 import sys
 
+# check file exits
 def check_file_exists(file_name):
     if not os.path.isfile(file_name):
         return
@@ -23,12 +24,15 @@ def create_grid(grid_dimension):
     led_grid = [[False]*grid_dimension for _ in range(grid_dimension)]
     return led_grid
     
-
+# split each valid instruction line into command, coordinates one and two
+# returns command, coordinates one and two
+# if the line is not properly formed, None is returned for all three variables
 def parse_commands(each_line):
     
     command = ""
     params = ""
     
+    # checks command is valid
     if each_line.startswith("switch"):
         command = "switch"
         params = each_line.replace(command,"")
@@ -46,6 +50,7 @@ def parse_commands(each_line):
     
     params_list = params.split(" ")  
     
+    # checks coordinates are valid
     if len(params_list) == 3:
         coordinates_1 = params_list[0]
         coordinates_2 = params_list[2]
@@ -72,6 +77,9 @@ def parse_commands(each_line):
     else:
         return None, None, None
 
+
+# changes the grid elements as directed by the command and coordinates
+# returns a grid and the sum
 def change_lights(led_grid, command, coordinates1, coordinates2):
     coordinates1_split = coordinates1.split(",")
     x1 = int(coordinates1_split[0])
@@ -114,6 +122,8 @@ def change_lights(led_grid, command, coordinates1, coordinates2):
     return led_grid, grid_sum
 
 
+# main function that calls the other functions above
+# returns the grid and the count of 'true' (i.e. light count)
 def main_led(file_path):
     light_count = 0
     
