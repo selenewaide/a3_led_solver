@@ -45,19 +45,23 @@ def parse_commands(each_line):
         return None, None, None
     
     params_list = params.split(" ")  
-    coordinates_1 = params_list[0]
-    coordinates_2 = params_list[2]
     
-    coordinates1_split = coordinates_1.split(",")
-    x1_check = isinstance((coordinates1_split[0]),int)
-    y1_check = isinstance((coordinates1_split[1]),int)
-    
-    coordinates2_split = coordinates_2.split(",")
-    x2_check = isinstance((coordinates2_split[0]),int)
-    y2_check = isinstance((coordinates2_split[1]),int)
-    
-    if x1_check and y1_check and x2_check and y2_check:
-        return command, coordinates_1, coordinates_2
+    if len(params_list) == 3:
+        coordinates_1 = params_list[0]
+        coordinates_2 = params_list[2]
+        
+        coordinates1_split = coordinates_1.split(",")
+        x1_check = isinstance((coordinates1_split[0]),int)
+        y1_check = isinstance((coordinates1_split[1]),int)
+        
+        coordinates2_split = coordinates_2.split(",")
+        x2_check = isinstance((coordinates2_split[0]),int)
+        y2_check = isinstance((coordinates2_split[1]),int)
+        
+        if x1_check and y1_check and x2_check and y2_check:
+            return command, coordinates_1, coordinates_2
+        else:
+            return None, None, None
     else:
         return None, None, None
 
